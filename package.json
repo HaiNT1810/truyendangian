@@ -1,5 +1,5 @@
 {
-  "name": "TDAppCore",
+  "name": "TruyenDanGian",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
     "test": "jest",
     "lint": "eslint .",
     "pod-install": "cd ios && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install",
-    "getSHAkey": "cd android && ./gradlew signingReport"
+    "getSHAkey": "cd android && ./gradlew signingReport",
+    "clean": "cd android && ./gradlew clean"
   },
   "dependencies": {
     "@manaflair/redux-batch": "^1.0.0",
@@ -27,6 +28,7 @@
     "react-native": "0.70.2",
     "react-native-config": "^1.4.6",
     "react-native-device-info": "^10.2.1",
+    "react-native-eject": "^0.1.2",
     "react-native-elements": "^3.4.2",
     "react-native-flash-message": "^0.3.1",
     "react-native-fs": "^2.20.0",
