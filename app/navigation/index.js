@@ -4,13 +4,14 @@ import {StyleSheet, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import SplashScreen from 'react-native-splash-screen';
 const Stack = createNativeStackNavigator();
 
 import AppStack from './AppStack';
 import {Host} from 'react-native-portalize';
 
 const RootContainerScreen = () => {
+  SplashScreen.hide();
   return (
     <NavigationContainer>
       <Host>

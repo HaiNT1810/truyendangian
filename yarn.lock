@@ -5927,9 +5927,9 @@ react-native-ratings@8.0.4:
     lodash "^4.17.15"
 
 react-native-reanimated@^3.0.0-rc.3:
-  version "3.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.0.0-rc.3.tgz#caa9388826cbcdf30b05b85135de093f83d0a164"
-  integrity sha512-kFkbazXfhq/zb3sQyLIFegLqxzPMJAd36pbz7jtOphZ1mEXDadX0ODp6eD7/PJHnLqYGHtsqSI8WMMLLN6rdjw==
+  version "3.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.0.0-rc.4.tgz#afaea1c9ea91865c4fc71f7b6e8c86fdccc62377"
+  integrity sha512-kBVx6JJceNe++QfBVV/poDEYn1XLqI6AcJzsu9OprNsKwAeqP6KysrY92crfC1txBr1lRPK0ClKjRhifPwFhlg==
   dependencies:
     "@babel/plugin-transform-object-assign" "^7.16.7"
     "@babel/preset-typescript" "^7.16.7"
@@ -5956,6 +5956,11 @@ react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
   integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
+
+react-native-splash-screen@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.3.0.tgz#3af71ed17afe50fee69590a45aec399d071ead02"
+  integrity sha512-rGjt6HkoSXxMqH4SQUJ1gnPQlPJV8+J47+4yhgTIan4bVvAwJhEeJH7wWt9hXSdH4+VfwTS0GTaflj1Tw83IhA==
 
 react-native-sqlite-storage@^6.0.1:
   version "6.0.1"

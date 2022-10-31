@@ -1,5 +1,6 @@
 package com.tdappcore;
-
+import android.os.Bundle;//splash screen
+import org.devio.rn.splashscreen.SplashScreen;//splash screen
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -12,7 +13,14 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "TDAppCore";
+    return "TruyenDanGian";
+  }
+
+  //splash screen
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this);
+    super.onCreate(savedInstanceState);
   }
 
   /**
