@@ -1,5 +1,5 @@
 {
-  "name": "TruyenDanGian",
+  "name": "truyendangian",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -21,11 +21,12 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "@reduxjs/toolkit": "^1.8.5",
-    "axios": "^1.1.0",
+    "axios": "^0.27.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "18.1.0",
     "react-native": "0.70.2",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-config": "^1.4.6",
     "react-native-device-info": "^10.2.1",
     "react-native-eject": "^0.1.2",
@@ -33,7 +34,6 @@
     "react-native-flash-message": "^0.3.1",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.7.0",
-    "react-native-i18n": "^2.0.15",
     "react-native-modalize": "^2.1.1",
     "react-native-paper": "^4.12.5",
     "react-native-portalize": "^1.0.7",

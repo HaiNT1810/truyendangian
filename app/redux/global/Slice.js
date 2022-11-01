@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { stat } from 'react-native-fs';
 
 const initialState = {
   accessToken: '',
+  isLoadedIntro: false,//Lần đầu vào thì load trang introduce (giới thiệu)
   userInfo: null,
 
   listLoading: false,
@@ -33,6 +35,9 @@ export const globalSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+    setLoadIntro: (state, action) => {
+      state.isLoadedIntro = action.payload;
     },
   },
 });
