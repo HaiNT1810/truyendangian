@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '@app/redux/global/Actions';
-import { Images } from '@app/themes';
+import { Colors, Fonts, Images } from '@app/themes';
+import { constBaseType, constType } from '@app/utils/data'
 
 
 const slides = [
@@ -16,8 +17,8 @@ const slides = [
     },
     {
         key: 1,
-        title: 'Hướng dẫn tìm truyện',
-        text: 'Hển thị ảnh hướng dẫn tìm truyện',
+        title: 'Bạn thích thể loại gì',
+        text: 'Lựa chọn thể loại truyện để chúng tôi hiểu bạn hơn từ đó đề xuất những mẩu truyện phù hợp.',
         image: "",
     },
     {
@@ -36,15 +37,62 @@ const slides = [
 
 const IntroScreen = (props) => {
     const dispatch = useDispatch();
+    const [baseType, setBaseType] = useState([]);//Truyện tranh|truyện chữ
+    const [type, setType] = useState([]);//các thể loại truyện
+
+    const _setBaseType = (code) => {
+        if (baseType.includes(code))//nếu đã có thì bỏ đi
+            setBaseType(baseType => baseType.filter(x => x != code));
+        else//nếu chưa có thì push vào
+            setBaseType(baseType => [...baseType, code])
+    }
+    const _setType = (code) => {
+        if (type.includes(code))//nếu đã có thì bỏ đi
+            setType(type => type.filter(x => x != code));
+        else//nếu chưa có thì push vào
+            setType(type => [...type, code])
+    }
 
     const _renderItem = ({ item }) => {
-        return (
-            <View style={{ flex: 1, alignItems: 'center', padding: 20, marginTop: 80 }}>
-                <Text style={styles.title}>{item.title}</Text>
-                {item.image ? <Image source={item.image} style={styles.image} resizeMode="contain" /> : <></>}
-                <Text style={styles.text}>{item.text}</Text>
-            </View>
-        );
+        switch (item.key) {
+            case 1://bước chọn thể loại ưa thích
+                return (
+                    <View style={{ flex: 1, alignItems: 'flex-start', padding: 20 }}>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <Text style={styles.text}>{item.text}</Text>
+                        <Text style={styles.typeTitle}>{constBaseType.title}</Text>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                            {constBaseType.data.map(x => {
+                                return (
+                                    <View style={[styles.typeItem.general, baseType.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
+                                        <TouchableOpacity key={"bt" + x.code} onPress={() => { _setBaseType(x.code) }}>
+                                            <Text style={baseType.includes(x.code) ? styles.typeItemText.active : styles.typeItemText.normal}>{x.name}</Text>
+                                        </TouchableOpacity>
+                                    </View>)
+                            })}
+                        </View>
+                        <Text style={styles.typeTitle}>{constType.title}</Text>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                            {constType.data.map(x => {
+                                return (
+                                    <View style={[styles.typeItem.general, type.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
+                                        <TouchableOpacity key={"bt" + x.code} onPress={() => { _setType(x.code) }}>
+                                            <Text style={type.includes(x.code) ? styles.typeItemText.active : styles.typeItemText.normal}>{x.name}</Text>
+                                        </TouchableOpacity>
+                                    </View>)
+                            })}
+                        </View>
+                    </View >
+                );
+            default:
+                return (
+                    <View style={{ flex: 1, alignItems: 'center', padding: 20, marginTop: 80 }}>
+                        <Text style={styles.title}>{item.title}</Text>
+                        {item.image ? <Image source={item.image} style={styles.image} resizeMode="contain" /> : <></>}
+                        <Text style={styles.text}>{item.text}</Text>
+                    </View>
+                );
+        }
     }
     const _renderNextButton = () => {
         return (
@@ -77,6 +125,7 @@ const IntroScreen = (props) => {
     };
     const doneIntro = async () => {
         dispatch(actions.setLoadIntro(true));
+        dispatch(actions.setFavorite({ favoriteBaseType: baseType, favoriteType: type }));
     }
 
     return (
@@ -89,14 +138,16 @@ const IntroScreen = (props) => {
             showSkipButton={true}
             onDone={() => doneIntro()}
             onSkip={() => doneIntro()}
-            dotStyle={{ color: 'transparent' }}
-            activeDotStyle={{ color: 'transparent' }}
-            dotClickEnabled={true}
+            activeDotStyle={{ backgroundColor: Colors.primary }}
+            canCancelContentTouches={true}
         />
     );
 }
 export default IntroScreen;
 const styles = StyleSheet.create({
+    title: { color: Colors.primary, fontSize: Fonts.size.h3 },
+    image: {},
+    text: { fontSize: Fonts.size.input },
     buttonCircle: {
         width: 40,
         height: 40,
@@ -113,4 +164,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10
     },
+    typeTitle: { color: Colors.primary, fontSize: Fonts.size.h5 },
+    typeItem: {
+        general: { fontSize: Fonts.size.large, borderRadius: 20, paddingHorizontal: 10, paddingVertical: 7, margin: 5 },
+        normal: { borderWidth: 1, borderColor: Colors.primary },
+        active: { backgroundColor: Colors.primary }
+    },
+    typeItemText: {
+        normal: { color: Colors.primary },
+        active: { color: Colors.white }
+    }
 });

@@ -9,6 +9,8 @@ const initialState = {
   listLoading: false,
   actionsLoading: false,
   error: null,
+  favoriteBaseType: [],//Thể loại truyện tranh/truyện chữ
+  favoriteType: [],//Thể loại chi tiết: ngụ ngôn, vè, ...
 };
 export const callTypes = {
   list: 'list',
@@ -38,6 +40,10 @@ export const globalSlice = createSlice({
     },
     setLoadIntro: (state, action) => {
       state.isLoadedIntro = action.payload;
+    },
+    setFavorite: (state, action) => {
+      state.favoriteBaseType = action.payload.favoriteBaseType;
+      state.favoriteType = action.payload.favoriteType;
     },
   },
 });
