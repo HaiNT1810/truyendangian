@@ -3,7 +3,9 @@ export default {
   white: '#FEFEFE',
   text: '#212529',
   line: '#E3E7EC',
-  primary: '#e98543',
+  muted: '#757E83',
+
+  primary: '#0e7071',
   secondary: '#F6F8FE',
   success: '#00C566',
   error: '#E53935',
@@ -21,4 +23,8 @@ export default {
   lineblack: '#4A4A65',
   green: '#6DD0A3',
   yellow: '#ffc247',
+
+  slide_1: '#cc8545',
+  slide_2: '#d03d45',
+  slide_3: '#2b3e66'
 };

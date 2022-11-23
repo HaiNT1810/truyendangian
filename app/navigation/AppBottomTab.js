@@ -1,18 +1,25 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Colors} from '@app/themes';
+import { View, Text } from 'react-native';
+import { Colors } from '@app/themes';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
-import {MAIN_HomeScreen, MAIN_SettingScreen} from '../screen/home';
+import {
+  MAIN_HomeScreen,
+  MAIN_SettingScreen,
+  MAIN_ComicScreen,
+  MAIN_NewsFeedScreen,
+  MAIN_NovelScreen,
+  MAIN_BookshelvesScreen
+} from '../screen/home';
 import AccountStack from './AccountStack';
 
-import {TDButtonNavigation} from '../components';
+import { TDButtonNavigation } from '../components';
 
 const PlusScreen = () => {
   return null;
@@ -28,27 +35,27 @@ const AppBottomTab = () => {
         tabBarActiveBackgroundColor: '#FFF',
         tabBarInactiveBackgroundColor: '#FFF',
         tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: '#757E83',
+        tabBarInactiveTintColor: Colors.muted,
         tabBarLabelStyle: {
           fontSize: 10,
           fontWeight: '400',
         },
-        tabBarStyle: {paddingHorizontal: isTablet ? 100 : 0, backgroundColor: '#FFFFFF'},
+        tabBarStyle: { paddingHorizontal: isTablet ? 100 : 0, backgroundColor: '#FFFFFF' },
       }}
       backBehavior={'initialRoute'}>
       <Tab.Screen
         headerMode={'none'}
-        name="HomeScreen"
-        component={AccountStack}
+        name="NewsfeedScreen"
+        component={MAIN_NewsFeedScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Lịch sử',
-          tabBarIcon: ({focused, tintColor, size}) => (
+          tabBarLabel: 'Bảng tin',
+          tabBarIcon: ({ focused, tintColor, size }) => (
             <View>
               <Icon
-                name="list"
+                name="rss"
                 size={isTablet ? 24 : 22}
-                color={focused ? Colors.primary : '#757E83'}
+                color={focused ? Colors.primary : Colors.muted}
                 solid={focused ? true : false}
               />
             </View>
@@ -57,18 +64,45 @@ const AppBottomTab = () => {
       />
 
       <Tab.Screen
-        name="BaoCaoScreen"
-        component={MAIN_HomeScreen}
+        name="ComicScreen"
+        component={MAIN_ComicScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Báo cáo',
+          tabBarLabel: 'Truyện tranh',
           tabBarBadge: null,
-          tabBarIcon: ({focused, tintColor, size}) => (
+          tabBarIcon: ({ focused, tintColor, size }) => (
             <View>
               <Icon
-                name="chart-line"
+                name="border-all"
                 size={isTablet ? 24 : 22}
-                color={focused ? Colors.primary : '#757E83'}
+                color={focused ? Colors.primary : Colors.muted}
+                solid={focused ? true : false}
+              />
+            </View>
+          ),
+        }}
+      />
+      {/* <Tab.Screen
+        name="AddScreen"
+        component={PlusScreen}
+        options={{
+          headerShown: false,
+          tabBarButton: () => <TDButtonNavigation />,
+        }}
+      /> */}
+      <Tab.Screen
+        name="NovelScreen"
+        component={MAIN_NovelScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Tiểu thuyết',
+          tabBarBadge: null,
+          tabBarIcon: ({ focused, tintColor, size }) => (
+            <View>
+              <Icon
+                name="pen-nib"
+                size={isTablet ? 24 : 22}
+                color={focused ? Colors.primary : Colors.muted}
                 solid={focused ? true : false}
               />
             </View>
@@ -76,40 +110,32 @@ const AppBottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="AddScreen"
-        component={PlusScreen}
+        name="BookshelvesScreen"
+        component={MAIN_BookshelvesScreen}
         options={{
           headerShown: false,
-          tabBarButton: () => <TDButtonNavigation />,
-        }}
-      />
-      <Tab.Screen
-        name="NhacNhoScreen"
-        component={MAIN_HomeScreen}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Nhắc nhở',
-          tabBarIcon: ({focused, tintColor, size}) => (
+          tabBarLabel: 'Giá sách',
+          tabBarIcon: ({ focused, tintColor, size }) => (
             <Icon
-              name="alarm-clock"
+              name="books"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : Colors.muted}
               solid={focused ? true : false}
             />
           ),
         }}
       />
       <Tab.Screen
-        name="SettingScreen"
+        name="UserScreen"
         component={MAIN_SettingScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Cài đặt',
-          tabBarIcon: ({focused, tintColor, size}) => (
+          tabBarLabel: 'Cá nhân',
+          tabBarIcon: ({ focused, tintColor, size }) => (
             <Icon
-              name="cogs"
+              name="user"
               size={isTablet ? 24 : 22}
-              color={focused ? Colors.primary : '#757E83'}
+              color={focused ? Colors.primary : Colors.muted}
               solid={focused ? true : false}
             />
           ),
