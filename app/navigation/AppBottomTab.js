@@ -14,9 +14,9 @@ import {
   MAIN_SettingScreen,
   MAIN_ComicScreen,
   MAIN_NewsFeedScreen,
-  MAIN_NovelScreen,
-  MAIN_BookshelvesScreen
-} from '../screen/home';
+  MAIN_LikedScreen,
+  MAIN_DownloadedScreen
+} from '@app/screen/home';
 import AccountStack from './AccountStack';
 
 import { TDButtonNavigation } from '../components';
@@ -68,12 +68,12 @@ const AppBottomTab = () => {
         component={MAIN_ComicScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Truyện tranh',
+          tabBarLabel: 'Truyện',
           tabBarBadge: null,
           tabBarIcon: ({ focused, tintColor, size }) => (
             <View>
               <Icon
-                name="border-all"
+                name="book-open"
                 size={isTablet ? 24 : 22}
                 color={focused ? Colors.primary : Colors.muted}
                 solid={focused ? true : false}
@@ -91,16 +91,16 @@ const AppBottomTab = () => {
         }}
       /> */}
       <Tab.Screen
-        name="NovelScreen"
-        component={MAIN_NovelScreen}
+        name="LikedScreen"
+        component={MAIN_LikedScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Tiểu thuyết',
+          tabBarLabel: 'Ưa thích',
           tabBarBadge: null,
           tabBarIcon: ({ focused, tintColor, size }) => (
             <View>
               <Icon
-                name="pen-nib"
+                name="heart"
                 size={isTablet ? 24 : 22}
                 color={focused ? Colors.primary : Colors.muted}
                 solid={focused ? true : false}
@@ -110,14 +110,14 @@ const AppBottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="BookshelvesScreen"
-        component={MAIN_BookshelvesScreen}
+        name="DownloadedScreen"
+        component={MAIN_DownloadedScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Giá sách',
+          tabBarLabel: 'Đã tải',
           tabBarIcon: ({ focused, tintColor, size }) => (
             <Icon
-              name="books"
+              name="download"
               size={isTablet ? 24 : 22}
               color={focused ? Colors.primary : Colors.muted}
               solid={focused ? true : false}

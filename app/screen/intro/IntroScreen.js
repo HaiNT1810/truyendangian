@@ -30,7 +30,7 @@ const slides = [
         key: 3,
         title: 'TD truyện dân gian',
         text: 'Nơi mang đến những phút giây giải trí thư giãn vui vẻ!',
-        image: require("@app/assets/images/demo.jpg"),
+        image: require("@app/assets/images/bg-min.jpg"),
     },
 ];
 
