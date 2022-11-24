@@ -71,3 +71,39 @@ export const constType = {
         },
     ]
 }
+
+export const demoTruyens = {
+    truyen1: {
+        ID: 1,
+        Title: "Tấm cám",
+        Description: "Truyện kể về Tấm, và Cám",
+        Author: "Sưu tầm",
+        Image: "images/comics/comic_1.png",
+        Score: 9.8
+    },
+    truyen2: {
+        ID: 2,
+        Title: "Demon Slayer",
+        Description: "Demon Slayer Truyện nhật",
+        Author: "Sưu tầm",
+        Image: "images/comics/comic_2.png",
+        Score: 9.3
+    },
+    truyen3: {
+        ID: 3,
+        Title: "Truyện cười",
+        Description: "Truyện cười Truyện cười Truyện cười",
+        Author: "Sưu tầm",
+        Image: "images/comics/comic_3.png",
+        Score: 9.2
+    },
+    truyen4: {
+        ID: 4,
+        Title: "Truyện vui",
+        Description: "Truyện vuiTruyện vuiTruyện vui",
+        Author: "Sưu tầm",
+        Image: "images/comics/comic_1.png",
+        Score: 9.0
+    }
+
+}

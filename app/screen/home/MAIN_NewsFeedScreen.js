@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, SafeAreaView } from 'react-native';
+import { View, StyleSheet, StatusBar, SafeAreaView, TouchableOpacity, Text } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { Colors, Fonts, Images } from '@app/themes';
 import { TDTextInputAccount } from '@app/components';
@@ -25,15 +25,15 @@ const MAIN_NewsFeedScreen = () => {
               size={isTablet ? 18 : 16}
               color={Colors.white}
             />
-            <TextInput 
+            <TextInput
               placeholder='Tìm kiếm . . .'
               placeholderTextColor={Colors.white}
               style={styles.searchInput}
             />
-            
+
           </View>
           <View style={styles.leftSearchWrap}>
-          <Icon
+            <Icon
               style={styles.bellIcon}
               name="bell"
               size={isTablet ? 18 : 16}

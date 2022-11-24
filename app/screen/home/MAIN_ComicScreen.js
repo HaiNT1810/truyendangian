@@ -7,13 +7,17 @@ import {
   StatusBar,
   SafeAreaView,
   Platform,
+  FlatList,
+  ImageBackground
 } from 'react-native';
-import { Colors, Images } from '@app/themes';
+import { Colors, Fonts, Images } from '@app/themes';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@app/utils';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
-import { ComicBlock, ComicMenu, ComicSlide } from './components'
+import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
+import { Comic_List_Horizontal } from '@app/components/comic';
+
 let isTablet = DeviceInfo.isTablet();
 
 let data = [
@@ -38,16 +42,32 @@ let data = [
 ]
 
 const MAIN_ComicScreen = () => {
-  
+  const [color, setColor] = useState(Colors.primary);
+  const handleSwiper = (index) => {
+    switch (index) {
+      case 0:
+        setColor(Colors.slide_1);
+        break;
+      case 1:
+        setColor(Colors.slide_2);
+        break;
+      case 2:
+        setColor(Colors.slide_3);
+        break;
+      default:
+        setColor(Colors.primary);
+        break;
+    }
+  }
   return (
     <Fragment>
       <View style={{ height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight }}></View>
-      <StatusBar translucent backgroundColor={Colors.primary} />
+      <StatusBar translucent backgroundColor={color} />
       <View style={styles.container}>
         <SafeAreaView>
           <View style={styles.upperHeaderPlacehoder}></View>
         </SafeAreaView>
-        <SafeAreaView style={styles.header} backgroundColor={Colors.primary}>
+        <SafeAreaView style={styles.header} backgroundColor={color}>
           <View style={styles.upperHeader}>
             <View style={styles.searchContainer}>
               <Icon
@@ -77,7 +97,33 @@ const MAIN_ComicScreen = () => {
         </SafeAreaView>
         <ScrollView>
           <View style={styles.paddingForHeader}>
-            <ComicSlide/>
+            <Swiper
+              onIndexChanged={index => handleSwiper(index)}
+              autoplayTimeout={4}
+              autoplay={true}
+              style={styles.swiper}
+              activeDotColor={Colors.white}
+              paginationStyle={styles.paginationStyle}
+              dotStyle={styles.dotStyle}
+              activeDotStyle={styles.dotStyle}
+            >
+              <View style={styles.slide_1}>
+                <View style={styles.slideWrapper}>
+                  <View>
+                    <Text style={styles.text}>image</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.text}>name</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.slide_2}>
+                <Text style={styles.text}>Text 2</Text>
+              </View>
+              <View style={styles.slide_3}>
+                <Text style={styles.text}>Text 3</Text>
+              </View>
+            </Swiper>
           </View>
           <View style={styles.scrollViewContent}>
             <ComicMenu/>
@@ -85,12 +131,10 @@ const MAIN_ComicScreen = () => {
               data={data}
               title="Truyện đang đọc"
             />
-            <ComicBlock
-              data={data}
-              title="Có chắc là HOT đây"
-            />
           </View>
+        <Comic_List_Horizontal type={"tophit"} headerText={"Top hit"} onPressSeeMore={() => { }}></Comic_List_Horizontal>
         </ScrollView>
+
       </View>
     </Fragment>
 
@@ -199,5 +243,70 @@ const styles = StyleSheet.create({
   dotStyle: {
     marginRight: 8
   },
+  menuContent: {
+    height: 90,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
 
+  },
+  menuItem: {
+    height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 6
+  },
+  menuIcon: {
+    backgroundColor: Colors.primary,
+    borderRadius: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    padding: 8
+  },
+  menuLabel: {
+    color: Colors.text,
+  },
+  blockContinuing: {
+    height: 180,
+  },
+  blockHeading: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
+  },
+  headingWrap: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  blockHeadingName: {
+    fontSize: 18,
+    fontWeight: '600',
+    paddingRight: 4,
+    color: Colors.text
+  },
+  blockViewAll: {
+    color: Colors.primary
+  },
+  blockIcon: {
+    marginLeft: 8,
+    alignItems: 'center',
+    justifyContent: "center",
+    backgroundColor: 'rgba(95, 95, 95, 0.15)',
+    borderRadius: 16
+  },
+  nextIcon: {
+    paddingVertical: 6,
+    paddingHorizontal: 10
+  },
+  comicBlock: {
+  },
+  comicItem: {
+    width: WINDOW_WIDTH / 3,
+    height: 200,
+    borderRadius: 15,
+    overflow: 'hidden',
+  }
 })

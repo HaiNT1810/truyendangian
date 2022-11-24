@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '@app/redux/global/Actions';
 import { Colors, Fonts, Images } from '@app/themes';
 import { constBaseType, constType } from '@app/utils/data'
-import FullScreen from 'react-native-full-screen';
 
 const slides = [
     {
@@ -31,12 +30,11 @@ const slides = [
         key: 3,
         title: 'TD truyện dân gian',
         text: 'Nơi mang đến những phút giây giải trí thư giãn vui vẻ!',
-        image: require("@app/assets/images/demo.jpg"),
+        image: require("@app/assets/images/bg-min.jpg"),
     },
 ];
 
 const IntroScreen = (props) => {
-    FullScreen.onFullScreen()
     const dispatch = useDispatch();
     const [baseType, setBaseType] = useState([]);//Truyện tranh|truyện chữ
     const [type, setType] = useState([]);//các thể loại truyện
