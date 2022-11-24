@@ -7,15 +7,13 @@ import {
   StatusBar,
   SafeAreaView,
   Platform,
-  FlatList,
-  ImageBackground
 } from 'react-native';
-import { Colors, Fonts, Images } from '@app/themes';
+import { Colors, Images } from '@app/themes';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@app/utils';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
-import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
+import { ComicBlock, ComicMenu, ComicSlide } from './components'
 import { Comic_List_Horizontal } from '@app/components/comic';
 
 let isTablet = DeviceInfo.isTablet();
@@ -42,34 +40,85 @@ let data = [
 ]
 
 const MAIN_ComicScreen = () => {
-  const [color, setColor] = useState(Colors.primary);
-  const handleSwiper = (index) => {
-    switch (index) {
-      case 0:
-        setColor(Colors.slide_1);
-        break;
-      case 1:
-        setColor(Colors.slide_2);
-        break;
-      case 2:
-        setColor(Colors.slide_3);
-        break;
-      default:
-        setColor(Colors.primary);
-        break;
-    }
-  }
+  
   return (
     <Fragment>
       <View style={{ height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight }}></View>
-      <StatusBar translucent backgroundColor={color} />
+      <StatusBar translucent backgroundColor={Colors.primary} />
       <View style={styles.container}>
         <SafeAreaView>
           <View style={styles.upperHeaderPlacehoder}></View>
         </SafeAreaView>
+        <SafeAreaView style={styles.header} backgroundColor={Colors.primary}>
+          <View style={styles.upperHeader}>
+            <View style={styles.searchContainer}>
+              <Icon
+                style={styles.searchIcon}
+                name="search"
+                size={isTablet ? 18 : 16}
+                color={Colors.white}
+              />
+              <TextInput
+                placeholder='Tìm kiếm . . .'
+                placeholderTextColor={Colors.white}
+                style={styles.searchInput}
+              />
         
         <Comic_List_Horizontal type={"tophit"} headerText={"Top hit"} onPressSeeMore={() => { }}></Comic_List_Horizontal>
 
+<<<<<<< .mine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+            </View>
+            <View style={styles.leftSearchWrap}>
+              <Icon
+                style={styles.bellIcon}
+                name="bell"
+                size={isTablet ? 18 : 16}
+                color={Colors.white}
+              />
+            </View>
+          </View>
+          <View style={styles.lowerHeader}>
+          </View>
+        </SafeAreaView>
+        <ScrollView>
+          <View style={styles.paddingForHeader}>
+            <ComicSlide/>
+          </View>
+          <View style={styles.scrollViewContent}>
+            <ComicMenu/>
+            <ComicBlock
+              data={data}
+              title="Truyện đang đọc"
+            />
+          </View>
+        </ScrollView>
+>>>>>>> .theirs
       </View>
     </Fragment>
 
@@ -178,70 +227,5 @@ const styles = StyleSheet.create({
   dotStyle: {
     marginRight: 8
   },
-  menuContent: {
-    height: 90,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
 
-  },
-  menuItem: {
-    height: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 6
-  },
-  menuIcon: {
-    backgroundColor: Colors.primary,
-    borderRadius: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    padding: 8
-  },
-  menuLabel: {
-    color: Colors.text,
-  },
-  blockContinuing: {
-    height: 180,
-  },
-  blockHeading: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-  },
-  headingWrap: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  blockHeadingName: {
-    fontSize: 18,
-    fontWeight: '600',
-    paddingRight: 4,
-    color: Colors.text
-  },
-  blockViewAll: {
-    color: Colors.primary
-  },
-  blockIcon: {
-    marginLeft: 8,
-    alignItems: 'center',
-    justifyContent: "center",
-    backgroundColor: 'rgba(95, 95, 95, 0.15)',
-    borderRadius: 16
-  },
-  nextIcon: {
-    paddingVertical: 6,
-    paddingHorizontal: 10
-  },
-  comicBlock: {
-  },
-  comicItem: {
-    width: WINDOW_WIDTH / 3,
-    height: 200,
-    borderRadius: 15,
-    overflow: 'hidden',
-  }
 })
