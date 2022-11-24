@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '@app/redux/global/Actions';
 import { Colors, Fonts, Images } from '@app/themes';
 import { constBaseType, constType } from '@app/utils/data'
-
+import FullScreen from 'react-native-full-screen';
 
 const slides = [
     {
@@ -17,25 +17,26 @@ const slides = [
     },
     {
         key: 1,
-        title: 'Bạn thích thể loại gì',
+        title: 'Bạn ưa thích thể loại gì',
         text: 'Lựa chọn thể loại truyện để chúng tôi hiểu bạn hơn từ đó đề xuất những mẩu truyện phù hợp.',
         image: "",
     },
-    {
-        key: 2,
-        title: 'Hướng dẫn đăng nhập',
-        text: 'Lợi ích của đăng nhập',
-        image: "",
-    },
+    // {
+    //     key: 2,
+    //     title: 'Hướng dẫn đăng nhập',
+    //     text: 'Lợi ích của đăng nhập',
+    //     image: "",
+    // },
     {
         key: 3,
-        title: 'done',
-        text: 'Chúc các bạn có những phút giây đọc truyện vui vẻ!',
-        image: "",
+        title: 'TD truyện dân gian',
+        text: 'Nơi mang đến những phút giây giải trí thư giãn vui vẻ!',
+        image: require("@app/assets/images/demo.jpg"),
     },
 ];
 
 const IntroScreen = (props) => {
+    FullScreen.onFullScreen()
     const dispatch = useDispatch();
     const [baseType, setBaseType] = useState([]);//Truyện tranh|truyện chữ
     const [type, setType] = useState([]);//các thể loại truyện
@@ -64,7 +65,7 @@ const IntroScreen = (props) => {
                         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                             {constBaseType.data.map(x => {
                                 return (
-                                    <View style={[styles.typeItem.general, baseType.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
+                                    <View key={x.code} style={[styles.typeItem.general, baseType.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
                                         <TouchableOpacity key={"bt" + x.code} onPress={() => { _setBaseType(x.code) }}>
                                             <Text style={baseType.includes(x.code) ? styles.typeItemText.active : styles.typeItemText.normal}>{x.name}</Text>
                                         </TouchableOpacity>
@@ -75,7 +76,7 @@ const IntroScreen = (props) => {
                         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                             {constType.data.map(x => {
                                 return (
-                                    <View style={[styles.typeItem.general, type.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
+                                    <View key={x.code} style={[styles.typeItem.general, type.includes(x.code) ? styles.typeItem.active : styles.typeItem.normal]}>
                                         <TouchableOpacity key={"bt" + x.code} onPress={() => { _setType(x.code) }}>
                                             <Text style={type.includes(x.code) ? styles.typeItemText.active : styles.typeItemText.normal}>{x.name}</Text>
                                         </TouchableOpacity>
@@ -86,11 +87,20 @@ const IntroScreen = (props) => {
                 );
             default:
                 return (
-                    <View style={{ flex: 1, alignItems: 'center', padding: 20, marginTop: 80 }}>
-                        <Text style={styles.title}>{item.title}</Text>
-                        {item.image ? <Image source={item.image} style={styles.image} resizeMode="contain" /> : <></>}
-                        <Text style={styles.text}>{item.text}</Text>
-                    </View>
+                    <View style={{ flex: 1, alignItems: 'center', overflow: "hidden" }}>
+                        {item.image ?
+                            <ImageBackground source={item.image} style={[styles.image]} >
+                                <View style={{ flex: 1, alignItems: 'center', paddingVertical: 80, backgroundColor: "rgba(0,0,0,0.7)" }}>
+                                    <Text style={[styles.title, { paddingBottom: 20 }]}>{item.title}</Text>
+                                    <Text style={[styles.text, { color: Colors.white }]}>{item.text}</Text>
+                                </View>
+                            </ImageBackground> :
+                            <>
+                                <Text style={styles.title}>{item.title}</Text>
+                                <Text style={styles.text}>{item.text}</Text>
+                            </>
+                        }
+                    </View >
                 );
         }
     }
@@ -146,19 +156,23 @@ const IntroScreen = (props) => {
 export default IntroScreen;
 const styles = StyleSheet.create({
     title: { color: Colors.primary, fontSize: Fonts.size.h3 },
-    image: {},
-    text: { fontSize: Fonts.size.input },
+    image: {
+        flexDirection: "row",
+        flex: 1,
+        resizeMode: 'cover'
+    },
+    text: { fontSize: Fonts.size.input, textAlign: "center" },
     buttonCircle: {
         width: 40,
         height: 40,
-        backgroundColor: 'rgba(0, 0, 0, .2)',
+        backgroundColor: 'rgba(0, 0, 0, .5)',
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
     buttonSquare: {
         height: 40,
-        backgroundColor: 'rgba(0, 0, 0, .2)',
+        backgroundColor: 'rgba(0, 0, 0, .5)',
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
