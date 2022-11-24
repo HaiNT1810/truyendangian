@@ -85,6 +85,10 @@ const MAIN_ComicScreen = () => {
               data={data}
               title="Truyện đang đọc"
             />
+            <ComicBlock
+              data={data}
+              title="Có chắc là HOT đây"
+            />
           </View>
         </ScrollView>
       </View>
