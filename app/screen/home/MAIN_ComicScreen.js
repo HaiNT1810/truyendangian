@@ -7,15 +7,13 @@ import {
   StatusBar,
   SafeAreaView,
   Platform,
-  FlatList,
-  ImageBackground
 } from 'react-native';
-import { Colors, Fonts, Images } from '@app/themes';
+import { Colors, Images } from '@app/themes';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@app/utils';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
-import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
+import { ComicBlock, ComicMenu, ComicSlide } from './components'
 let isTablet = DeviceInfo.isTablet();
 
 let data = [
@@ -40,32 +38,16 @@ let data = [
 ]
 
 const MAIN_ComicScreen = () => {
-  const [color, setColor] = useState(Colors.primary);
-  const handleSwiper = (index) => {
-    switch (index) {
-      case 0:
-        setColor(Colors.slide_1);
-        break;
-      case 1:
-        setColor(Colors.slide_2);
-        break;
-      case 2:
-        setColor(Colors.slide_3);
-        break;
-      default:
-        setColor(Colors.primary);
-        break;
-    }
-  }
+  
   return (
     <Fragment>
       <View style={{ height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight }}></View>
-      <StatusBar translucent backgroundColor={color} />
+      <StatusBar translucent backgroundColor={Colors.primary} />
       <View style={styles.container}>
         <SafeAreaView>
           <View style={styles.upperHeaderPlacehoder}></View>
         </SafeAreaView>
-        <SafeAreaView style={styles.header} backgroundColor={color}>
+        <SafeAreaView style={styles.header} backgroundColor={Colors.primary}>
           <View style={styles.upperHeader}>
             <View style={styles.searchContainer}>
               <Icon
@@ -95,115 +77,14 @@ const MAIN_ComicScreen = () => {
         </SafeAreaView>
         <ScrollView>
           <View style={styles.paddingForHeader}>
-            <Swiper
-              onIndexChanged={index => handleSwiper(index)}
-              autoplayTimeout={4}
-              autoplay={true}
-              style={styles.swiper}
-              activeDotColor={Colors.white}
-              paginationStyle={styles.paginationStyle}
-              dotStyle={styles.dotStyle}
-              activeDotStyle={styles.dotStyle}
-            >
-              <View style={styles.slide_1}>
-                <View style={styles.slideWrapper}>
-                  <View>
-                    <Text style={styles.text}>image</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text}>name</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.slide_2}>
-                <Text style={styles.text}>Text 2</Text>
-              </View>
-              <View style={styles.slide_3}>
-                <Text style={styles.text}>Text 3</Text>
-              </View>
-            </Swiper>
+            <ComicSlide/>
           </View>
           <View style={styles.scrollViewContent}>
-            <View style={styles.menuContent}>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="th-large"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Danh mục</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="crown"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>BXH</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="tasks"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Nhiệm vụ</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="heart"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Theo dõi</Text>
-              </View>
-            </View>
-            <View style={styles.blockContinuing}>
-              <View style={styles.blockHeading}>
-                <View style={styles.headingWrap}>
-                  <Text style={styles.blockHeadingName}>Truyện đang đọc</Text>
-                  <View style={styles.blockIcon}>
-                    <Icon
-                      style={styles.nextIcon}
-                      name="chevron-right"
-                      size={isTablet ? 18 : 16}
-                      color={Colors.black}
-                    />
-                  </View>
-                </View>
-                <Text style={styles.blockViewAll}>Xem tất cả</Text>
-              </View>
-              <View style={styles.blockContent}>
-                <FlatList
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  scrollEnabled={false}
-                  keyExtractor={item => item.id}
-                  data={data}
-                  renderItem={({ item }) => (
-                    <View styles={styles.comicBlock}>
-                      <ImageBackground source={item.image} style={styles.comicItem}>
-                        <Text style={styles.rate}>{item.rate}</Text>
-                        <Text styles={styles.name}>{item.name}</Text>
-                      </ImageBackground>
-                    </View>
-
-                  )}
-                />
-              </View>
-            </View>
+            <ComicMenu/>
+            <ComicBlock
+              data={data}
+              title="Truyện đang đọc"
+            />
           </View>
         </ScrollView>
       </View>
@@ -314,70 +195,5 @@ const styles = StyleSheet.create({
   dotStyle: {
     marginRight: 8
   },
-  menuContent: {
-    height: 90,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
 
-  },
-  menuItem: {
-    height: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 6
-  },
-  menuIcon: {
-    backgroundColor: Colors.primary,
-    borderRadius: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    padding: 8
-  },
-  menuLabel: {
-    color: Colors.text,
-  },
-  blockContinuing: {
-    height: 180,
-  },
-  blockHeading: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-  },
-  headingWrap: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  blockHeadingName: {
-    fontSize: 18,
-    fontWeight: '600',
-    paddingRight: 4,
-    color: Colors.text
-  },
-  blockViewAll: {
-    color: Colors.primary
-  },
-  blockIcon: {
-    marginLeft: 8,
-    alignItems: 'center',
-    justifyContent: "center",
-    backgroundColor: 'rgba(95, 95, 95, 0.15)',
-    borderRadius: 16
-  },
-  nextIcon: {
-    paddingVertical: 6,
-    paddingHorizontal: 10
-  },
-  comicBlock: {
-  },
-  comicItem: {
-    width: WINDOW_WIDTH / 3,
-    height: 200,
-    borderRadius: 15,
-    overflow: 'hidden',
-  }
 })
