@@ -16,6 +16,8 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
 import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
+import { Comic_List_Horizontal } from '@app/components/comic';
+
 let isTablet = DeviceInfo.isTablet();
 
 let data = [
@@ -65,147 +67,9 @@ const MAIN_ComicScreen = () => {
         <SafeAreaView>
           <View style={styles.upperHeaderPlacehoder}></View>
         </SafeAreaView>
-        <SafeAreaView style={styles.header} backgroundColor={color}>
-          <View style={styles.upperHeader}>
-            <View style={styles.searchContainer}>
-              <Icon
-                style={styles.searchIcon}
-                name="search"
-                size={isTablet ? 18 : 16}
-                color={Colors.white}
-              />
-              <TextInput
-                placeholder='Tìm kiếm . . .'
-                placeholderTextColor={Colors.white}
-                style={styles.searchInput}
-              />
+        
+        <Comic_List_Horizontal type={"tophit"} headerText={"Top hit"} onPressSeeMore={() => { }}></Comic_List_Horizontal>
 
-            </View>
-            <View style={styles.leftSearchWrap}>
-              <Icon
-                style={styles.bellIcon}
-                name="bell"
-                size={isTablet ? 18 : 16}
-                color={Colors.white}
-              />
-            </View>
-          </View>
-          <View style={styles.lowerHeader}>
-          </View>
-        </SafeAreaView>
-        <ScrollView>
-          <View style={styles.paddingForHeader}>
-            <Swiper
-              onIndexChanged={index => handleSwiper(index)}
-              autoplayTimeout={4}
-              autoplay={true}
-              style={styles.swiper}
-              activeDotColor={Colors.white}
-              paginationStyle={styles.paginationStyle}
-              dotStyle={styles.dotStyle}
-              activeDotStyle={styles.dotStyle}
-            >
-              <View style={styles.slide_1}>
-                <View style={styles.slideWrapper}>
-                  <View>
-                    <Text style={styles.text}>image</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text}>name</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.slide_2}>
-                <Text style={styles.text}>Text 2</Text>
-              </View>
-              <View style={styles.slide_3}>
-                <Text style={styles.text}>Text 3</Text>
-              </View>
-            </Swiper>
-          </View>
-          <View style={styles.scrollViewContent}>
-            <View style={styles.menuContent}>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="th-large"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Danh mục</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="crown"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>BXH</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="tasks"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Nhiệm vụ</Text>
-              </View>
-              <View style={styles.menuItem}>
-                <View style={styles.menuIcon}>
-                  <Icon
-                    style={styles.group}
-                    name="heart"
-                    size={28}
-                    color={Colors.white}
-                  />
-                </View>
-                <Text style={styles.menuLabel}>Theo dõi</Text>
-              </View>
-            </View>
-            <View style={styles.blockContinuing}>
-              <View style={styles.blockHeading}>
-                <View style={styles.headingWrap}>
-                  <Text style={styles.blockHeadingName}>Truyện đang đọc</Text>
-                  <View style={styles.blockIcon}>
-                    <Icon
-                      style={styles.nextIcon}
-                      name="chevron-right"
-                      size={isTablet ? 18 : 16}
-                      color={Colors.black}
-                    />
-                  </View>
-                </View>
-                <Text style={styles.blockViewAll}>Xem tất cả</Text>
-              </View>
-              <View style={styles.blockContent}>
-                <FlatList
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  scrollEnabled={false}
-                  keyExtractor={item => item.id}
-                  data={data}
-                  renderItem={({ item }) => (
-                    <View styles={styles.comicBlock}>
-                      <ImageBackground source={item.image} style={styles.comicItem}>
-                        <Text style={styles.rate}>{item.rate}</Text>
-                        <Text styles={styles.name}>{item.name}</Text>
-                      </ImageBackground>
-                    </View>
-
-                  )}
-                />
-              </View>
-            </View>
-          </View>
-        </ScrollView>
       </View>
     </Fragment>
 
