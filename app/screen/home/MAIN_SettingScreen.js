@@ -11,6 +11,7 @@ import {TDMenuItem, TDDivider} from '@app/components';
 const MAIN_HomeScreen = () => {
   const navigation = useNavigation();
 
+
   return (
     <View style={{flex: 1}}>
       <Header

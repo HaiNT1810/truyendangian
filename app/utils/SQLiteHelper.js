@@ -33,9 +33,9 @@ export default class SQLite {
     this.successInfo = (text, absolutely) => {
       if (__DEV__) {
         if (absolutely === true) {
-          console.log(text);
+          // console.log(text);
         } else {
-          console.log(`[SQLiteHelper] info: database ${text} success.`);
+          //console.log(`[SQLiteHelper] info: database ${text} success.`);
         }
       }
     };
@@ -421,7 +421,7 @@ export default class SQLite {
           } else if (typeof conditions === 'string') {
             // SQL
             sqlStr += `FROM ${tableName} WHERE ${conditions}`;
-            console.log('sqlStrsqlStr', sqlStr);
+            //console.log('sqlStrsqlStr', sqlStr);
           }
         } else {
           sqlStr += `FROM ${tableName}`;
