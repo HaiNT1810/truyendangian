@@ -1,5 +1,6 @@
 export default {
   transparent: 'rgba(0,0,0,0)',
+  background: 'rgba(0,0,0,0)',
   white: '#FEFEFE',
   text: '#212529',
   line: '#E3E7EC',

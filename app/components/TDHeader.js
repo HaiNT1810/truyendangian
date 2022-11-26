@@ -20,7 +20,7 @@ const TDHeader = ({ leftComponentOnPress, title }) => {
             alignContent: 'center',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 10,
+            paddingHorizontal: 10,
           }}>
           <FontAwesome name={'user'} size={24} color={'#2E2E2E'} />
         </View>
@@ -35,9 +35,11 @@ const TDHeader = ({ leftComponentOnPress, title }) => {
             alignContent: 'center',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 10,
+            paddingHorizontal: 10,
           }}>
-          <FontAwesome name={'search'} size={18} color={'#2E2E2E'} />
+          <TouchableOpacity onPress={() => { console.log(1) }}>
+            <FontAwesome name={'search'} size={18} color={'#2E2E2E'} />
+          </TouchableOpacity>
         </View>
       }
       containerStyle={{
