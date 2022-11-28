@@ -10,7 +10,8 @@ let isTablet = DeviceInfo.isTablet();
 
 const MAIN_LikedScreen = (props) => {
     const { } = props;
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);//cả trang reload lại
+    const [refreshing, setRefreshing] = useState(true);//không load lại cả trang
     const [data, setData] = useState([]);
     const [takenTotal, setTakenTotal] = useState(6);//đã lấy
     const [total, setTotal] = useState(20);//Tổng số lượng trong ds sẽ lấy
@@ -23,18 +24,19 @@ const MAIN_LikedScreen = (props) => {
                 setData([...data, ...demoTruyens]);
             }
             setLoading(false);
+            setRefreshing(false);
         };
-        if (loading)
+        if (loading || refreshing)
             fetchData();
         return () => { };
-    }, [loading])
+    }, [loading, refreshing])
 
     //Loadmore flatlist
     const getLoadMore = async () => {
         setFooterLoad(true);
         if (takenTotal < total) {
             setTakenTotal(takenTotal + 6);
-            setLoading(true);
+            setRefreshing(true);
         }
         else {
             setFooterLoad(false);
@@ -49,7 +51,7 @@ const MAIN_LikedScreen = (props) => {
                 <View style={styles.container}>
                     <FlatList
                         contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 10, justifyContent: 'center', alignItems: "stretch" }}
-                        showsVerticalScrollIndicator={false}
+                        showsVerticalScrollIndicator={true}
                         showsHorizontalScrollIndicator={false}
                         style={{ width: '100%' }}
                         data={data ? data : []}
@@ -66,8 +68,8 @@ const MAIN_LikedScreen = (props) => {
                         }}
                         onEndReachedThreshold={0.5}
                         numColumns={2}
-                        refreshControl={<RefreshControl refreshing={loading} onRefresh={() => { setLoading(true) }} />}
-                    //ListFooterComponent={footerLoad ? <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} /> : <View><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingTop: 30, paddingBottom: 30 }}>Đã hết danh sách!</Text></View>}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true) }} />}
+                        //ListFooterComponent={footerLoad ? <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} /> : <View><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingTop: 30, paddingBottom: 30 }}>Đã hết danh sách!</Text></View>}
                     />
                 </View>
             )}

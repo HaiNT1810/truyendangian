@@ -1,6 +1,6 @@
 const Images = {
   size: {
-    storiesItem: 3 / 4
+    storiesItem: 3 / 4,//kích thước width/height
   },
   images: {
     slide_1: require('@app/assets/images/slide_1.jpg'),

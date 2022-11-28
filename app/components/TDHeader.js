@@ -22,7 +22,7 @@ const TDHeader = ({ leftComponentOnPress, title }) => {
             justifyContent: 'center',
             paddingHorizontal: 10,
           }}>
-          <FontAwesome name={'user'} size={24} color={'#2E2E2E'} />
+          <Image source={Images.logos}></Image>
         </View>
       }
       centerComponent={{
@@ -32,8 +32,7 @@ const TDHeader = ({ leftComponentOnPress, title }) => {
       rightComponent={
         <View
           style={{
-            alignContent: 'center',
-            alignItems: 'center',
+            flexGrow: 1,
             justifyContent: 'center',
             paddingHorizontal: 10,
           }}>
@@ -43,7 +42,7 @@ const TDHeader = ({ leftComponentOnPress, title }) => {
         </View>
       }
       containerStyle={{
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.background,
         borderBottomWidth: 0,
         justifyContent: 'space-around',
       }}
