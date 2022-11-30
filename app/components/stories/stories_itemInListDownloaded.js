@@ -20,13 +20,15 @@ const Stories_itemInListDownloaded = (props) => {
                             <View style={{ flex: 2, alignItems: 'flex-start' }}>
                                 <Text style={styles.downloadSize}>215.5 MB</Text>
                             </View>
-                            <TouchableOpacity style={styles.downloadButton} onPress={() => { delFunc(item) }}>
-                                <FontAwesome5Icon name="trash-alt" solid size={24} color={Colors.error} />
-                            </TouchableOpacity>
+                            {delFunc ?
+                                <TouchableOpacity style={styles.downloadButton} onPress={() => { delFunc(item) }}>
+                                    <FontAwesome5Icon name="trash-alt" solid size={24} color={Colors.error} />
+                                </TouchableOpacity>
+                                : <></>}
                         </View>
                     </View>
                 </View>
-            </TouchableOpacity >
+            </TouchableOpacity>
         </View >
     );
 };
