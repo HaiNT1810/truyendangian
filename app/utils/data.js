@@ -9,6 +9,10 @@ export const constBaseType = {
         {
             code: "truyentranh",
             name: "Truyện tranh"
+        },
+        {
+            code: "truyenaudio",
+            name: "Truyện audio"
         }
     ]
 }

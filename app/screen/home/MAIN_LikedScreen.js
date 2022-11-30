@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, StatusBar, SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Colors } from '@app/themes';
 import DeviceInfo from 'react-native-device-info';
@@ -42,8 +42,11 @@ const MAIN_LikedScreen = (props) => {
             setFooterLoad(false);
         }
     };
+
+    const keyExtractor = useCallback((item, index) => index, []);
+    const renderItem = useCallback(({ item, index }) => <Stories_itemInList item={item} order={index + 1} />, []);
     return (
-        <View style={{ flex: 1, backgroundColor: Colors.background }}>
+        <View style={{ flex: 1 }}>
             <TDHeader title={"Ưa thích"}></TDHeader>
             {loading ? (
                 <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} />
@@ -55,11 +58,9 @@ const MAIN_LikedScreen = (props) => {
                         showsHorizontalScrollIndicator={false}
                         style={{ width: '100%' }}
                         data={data ? data : []}
-                        renderItem={({ item, index }) => {
-                            return <Stories_itemInList item={item} order={index + 1} />;
-                        }}
+                        renderItem={renderItem}
                         //onScroll={(a, b) => { _handleOnScroll(a, b) }}
-                        keyExtractor={(item, index) => index.toString()}
+                        keyExtractor={keyExtractor}
                         ListEmptyComponent={() => (
                             <Stories_listempty title="Danh sách ưa thích trống" content="Dường như bạn chưa thêm truyện nào vào danh sách ưa thích"></Stories_listempty>
                         )}
@@ -69,7 +70,7 @@ const MAIN_LikedScreen = (props) => {
                         onEndReachedThreshold={0.5}
                         numColumns={2}
                         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true) }} />}
-                        //ListFooterComponent={footerLoad ? <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} /> : <View><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingTop: 30, paddingBottom: 30 }}>Đã hết danh sách!</Text></View>}
+                    //ListFooterComponent={footerLoad ? <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} /> : <View><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingTop: 30, paddingBottom: 30 }}>Đã hết danh sách!</Text></View>}
                     />
                 </View>
             )}

@@ -1,15 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Colors, Fonts, Images } from '@app/themes';
-import { Flex } from '@ant-design/react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import { Icon } from 'react-native-elements';
 
 const Stories_itemInListDownloaded = (props) => {
     const navigation = useNavigation();
-    const { item, order, imgHeight } = props;
+    const { item, order, imgHeight, delFunc } = props;
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => { console.log("natigate item " + item.ID) }}>
@@ -21,19 +20,12 @@ const Stories_itemInListDownloaded = (props) => {
                             <View style={{ flex: 2, alignItems: 'flex-start' }}>
                                 <Text style={styles.downloadSize}>215.5 MB</Text>
                             </View>
-                            <TouchableOpacity style={styles.downloadButton}><FontAwesome5Icon name="trash-alt" solid size={24} color={Colors.error} /></TouchableOpacity>
+                            <TouchableOpacity style={styles.downloadButton} onPress={() => { delFunc(item) }}>
+                                <FontAwesome5Icon name="trash-alt" solid size={24} color={Colors.error} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                {/* <Flex>
-                    <Flex.Item flex={1}>
-                        <Image source={item.Image} style={[styles.image, { height: imgHeight }]} resizeMode='contain'></Image>
-                    </Flex.Item>
-                    <Flex.Item flex={2}>
-                        <Text style={styles.title}>{item.Title}</Text>
-                        <Text style={styles.score}>{item.Score.toFixed(1)}</Text>
-                    </Flex.Item>
-                </Flex> */}
             </TouchableOpacity >
         </View >
     );
