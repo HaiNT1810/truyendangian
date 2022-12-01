@@ -1,6 +1,6 @@
 const Images = {
   size: {
-    storiesItem: 3 / 4
+    storiesItem: 3 / 4,//kích thước width/height
   },
   comics: {
     banner: require('@app/assets/images/comics/banner.png'),

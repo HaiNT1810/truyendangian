@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, StatusBar, SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Colors } from '@app/themes';
 import DeviceInfo from 'react-native-device-info';
@@ -10,7 +10,8 @@ let isTablet = DeviceInfo.isTablet();
 
 const MAIN_LikedScreen = (props) => {
     const { } = props;
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);//cả trang reload lại
+    const [refreshing, setRefreshing] = useState(true);//không load lại cả trang
     const [data, setData] = useState([]);
     const [takenTotal, setTakenTotal] = useState(6);//đã lấy
     const [total, setTotal] = useState(20);//Tổng số lượng trong ds sẽ lấy
@@ -23,25 +24,29 @@ const MAIN_LikedScreen = (props) => {
                 setData([...data, ...demoTruyens]);
             }
             setLoading(false);
+            setRefreshing(false);
         };
-        if (loading)
+        if (loading || refreshing)
             fetchData();
         return () => { };
-    }, [loading])
+    }, [loading, refreshing])
 
     //Loadmore flatlist
     const getLoadMore = async () => {
         setFooterLoad(true);
         if (takenTotal < total) {
             setTakenTotal(takenTotal + 6);
-            setLoading(true);
+            setRefreshing(true);
         }
         else {
             setFooterLoad(false);
         }
     };
+
+    const keyExtractor = useCallback((item, index) => index, []);
+    const renderItem = useCallback(({ item, index }) => <Stories_itemInList item={item} order={index + 1} />, []);
     return (
-        <View style={{ flex: 1, backgroundColor: Colors.background }}>
+        <View style={{ flex: 1 }}>
             <TDHeader title={"Ưa thích"}></TDHeader>
             {loading ? (
                 <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} />
@@ -49,15 +54,13 @@ const MAIN_LikedScreen = (props) => {
                 <View style={styles.container}>
                     <FlatList
                         contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 10, justifyContent: 'center', alignItems: "stretch" }}
-                        showsVerticalScrollIndicator={false}
+                        showsVerticalScrollIndicator={true}
                         showsHorizontalScrollIndicator={false}
                         style={{ width: '100%' }}
                         data={data ? data : []}
-                        renderItem={({ item, index }) => {
-                            return <Stories_itemInList item={item} order={index + 1} />;
-                        }}
+                        renderItem={renderItem}
                         //onScroll={(a, b) => { _handleOnScroll(a, b) }}
-                        keyExtractor={(item, index) => index.toString()}
+                        keyExtractor={keyExtractor}
                         ListEmptyComponent={() => (
                             <Stories_listempty title="Danh sách ưa thích trống" 
                             content="Dường như bạn chưa thêm truyện nào vào danh sách ưa thích"></Stories_listempty>
@@ -67,7 +70,7 @@ const MAIN_LikedScreen = (props) => {
                         }}
                         onEndReachedThreshold={0.5}
                         numColumns={2}
-                        refreshControl={<RefreshControl refreshing={loading} onRefresh={() => { setLoading(true) }} />}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true) }} />}
                     //ListFooterComponent={footerLoad ? <ActivityIndicator size="large" color="#fb8c00" style={{ flex: 1, justifyContent: 'center' }} /> : <View><Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingTop: 30, paddingBottom: 30 }}>Đã hết danh sách!</Text></View>}
                     />
                 </View>

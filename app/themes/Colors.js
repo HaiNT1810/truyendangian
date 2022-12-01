@@ -1,12 +1,14 @@
 export default {
   transparent: 'rgba(0,0,0,0)',
-  background: 'rgba(0,0,0,0)',
+  background: 'rgba(255,255,255,0)',
   white: '#FEFEFE',
   text: '#212529',
   line: '#E3E7EC',
   muted: '#757E83',
 
-  primary: '#0e7071',
+  primary: '#0fcf54',
+  primary10: 'rgba(15,207,84,0.1)',
+  lightPrimary: '#ebfaf0',
   secondary: '#F6F8FE',
   success: '#00C566',
   error: '#E53935',
