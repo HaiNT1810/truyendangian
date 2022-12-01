@@ -2,142 +2,31 @@ import React, { Fragment, useState } from 'react';
 import Swiper from 'react-native-swiper'
 import {
   View,
-  Text,
   StyleSheet,
-  StatusBar,
-  SafeAreaView,
-  Platform,
-  FlatList,
-  ImageBackground
+
 } from 'react-native';
 import { Colors, Fonts, Images } from '@app/themes';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@app/utils';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome5Pro';
-import DeviceInfo from 'react-native-device-info';
-import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
-import { Comic_List_Horizontal } from '@app/components/comic';
-
-let isTablet = DeviceInfo.isTablet();
-
-let data = [
-  {
-    id: 1,
-    name: 'Demon slayder',
-    image: Images.comics.comic_1,
-    rate: 10.0
-  },
-  {
-    id: 2,
-    name: 'Attack on titan',
-    image: Images.comics.comic_2,
-    rate: 9.8
-  },
-  {
-    id: 3,
-    name: `The king's avatar`,
-    image: Images.comics.comic_3,
-    rate: 9.7
-  }
-]
-
+import { useNavigation } from '@react-navigation/native';
+import { Comic_List_Horizontal, Comic_Home_Header } from '@app/components/comic';
 const MAIN_ComicScreen = () => {
-  const [color, setColor] = useState(Colors.primary);
-  const handleSwiper = (index) => {
-    switch (index) {
-      case 0:
-        setColor(Colors.slide_1);
-        break;
-      case 1:
-        setColor(Colors.slide_2);
-        break;
-      case 2:
-        setColor(Colors.slide_3);
-        break;
-      default:
-        setColor(Colors.primary);
-        break;
-    }
-  }
+  const navigation = useNavigation();
   return (
-    <Fragment>
-      <View style={{ height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight }}></View>
-      <StatusBar translucent backgroundColor={color} />
-      <View style={styles.container}>
-        <SafeAreaView>
-          <View style={styles.upperHeaderPlacehoder}></View>
-        </SafeAreaView>
-        <SafeAreaView style={styles.header} backgroundColor={color}>
-          <View style={styles.upperHeader}>
-            <View style={styles.searchContainer}>
-              <Icon
-                style={styles.searchIcon}
-                name="search"
-                size={isTablet ? 18 : 16}
-                color={Colors.white}
-              />
-              <TextInput
-                placeholder='Tìm kiếm . . .'
-                placeholderTextColor={Colors.white}
-                style={styles.searchInput}
-              />
-
-            </View>
-            <View style={styles.leftSearchWrap}>
-              <Icon
-                style={styles.bellIcon}
-                name="bell"
-                size={isTablet ? 18 : 16}
-                color={Colors.white}
-              />
-            </View>
-          </View>
-          <View style={styles.lowerHeader}>
-          </View>
-        </SafeAreaView>
-        <ScrollView>
-          <View style={styles.paddingForHeader}>
-            <Swiper
-              onIndexChanged={index => handleSwiper(index)}
-              autoplayTimeout={4}
-              autoplay={true}
-              style={styles.swiper}
-              activeDotColor={Colors.white}
-              paginationStyle={styles.paginationStyle}
-              dotStyle={styles.dotStyle}
-              activeDotStyle={styles.dotStyle}
-            >
-              <View style={styles.slide_1}>
-                <View style={styles.slideWrapper}>
-                  <View>
-                    <Text style={styles.text}>image</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text}>name</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.slide_2}>
-                <Text style={styles.text}>Text 2</Text>
-              </View>
-              <View style={styles.slide_3}>
-                <Text style={styles.text}>Text 3</Text>
-              </View>
-            </Swiper>
-          </View>
-          <View style={styles.scrollViewContent}>
-            <ComicMenu/>
-            <ComicBlock
-              data={data}
-              title="Truyện đang đọc"
-            />
-          </View>
-        <Comic_List_Horizontal type={"tophit"} headerText={"Top hit"} onPressSeeMore={() => { }}></Comic_List_Horizontal>
-        </ScrollView>
-
-      </View>
-    </Fragment>
-
+    <View style={styles.container}>
+      <Comic_Home_Header  onPressSeeMoreFunc={() => { }}  />
+      <Comic_List_Horizontal
+        type='opened'
+        headerText="Truyện đang đọc"
+        showSeeMore={true}
+        onPressSeeMore={() => {}}
+      />
+      <Comic_List_Horizontal
+        type='tophit'
+        headerText="Có chắc HOT là đây"
+        showSeeMore={true}
+        onPressSeeMore={() => navigation.navigate('MAIN_ComicHotScreen')}
+      />
+    </View>
   );
 };
 

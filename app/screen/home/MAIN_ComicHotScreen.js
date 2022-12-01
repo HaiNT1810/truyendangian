@@ -8,7 +8,7 @@ import { Stories_itemInList, Stories_listempty } from '@app/components/stories';
 import { demoTruyens } from '@app/utils/data';
 let isTablet = DeviceInfo.isTablet();
 
-const MAIN_LikedScreen = (props) => {
+const MAIN_ComicHotScreen = (props) => {
     const { } = props;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -59,8 +59,7 @@ const MAIN_LikedScreen = (props) => {
                         //onScroll={(a, b) => { _handleOnScroll(a, b) }}
                         keyExtractor={(item, index) => index.toString()}
                         ListEmptyComponent={() => (
-                            <Stories_listempty title="Danh sách ưa thích trống" 
-                            content="Dường như bạn chưa thêm truyện nào vào danh sách ưa thích"></Stories_listempty>
+                            <Stories_listempty title="Danh sách ưa thích trống" content="Dường như bạn chưa thêm truyện nào vào danh sách ưa thích"></Stories_listempty>
                         )}
                         onEndReached={() => {
                             getLoadMore()
@@ -76,7 +75,7 @@ const MAIN_LikedScreen = (props) => {
     );
 };
 
-export default MAIN_LikedScreen;
+export default MAIN_ComicHotScreen;
 
 const styles = StyleSheet.create({
     container: {

@@ -106,3 +106,12 @@ export const demoTruyens = [
         Score: 9.0
     }
 ]
+
+export const demoBanner = {
+    ID: 1,
+    Title: "Demon Slayer: Kimetsu no Yaiba",
+    Description: "Câu chuyện kể về Kamado Tanjirou, một cậu bé tốt bụng kiếm sống qua ngày bằng nghề bán than",
+    Author: "Sưu tầm",
+    Image: require("@app/assets/images/comics/banner.png"),
+    Score: 9.8
+}

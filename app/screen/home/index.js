@@ -4,12 +4,13 @@ import MAIN_ComicScreen from './MAIN_ComicScreen';
 import MAIN_NewsFeedScreen from './MAIN_NewsFeedScreen'
 import MAIN_LikedScreen from './MAIN_LikedScreen';
 import MAIN_DownloadedScreen from './MAIN_DownloadedScreen';
-
+import MAIN_ComicHotScreen from './MAIN_ComicHotScreen';
 export {
   MAIN_HomeScreen,
   MAIN_SettingScreen,
   MAIN_ComicScreen,
   MAIN_NewsFeedScreen,
   MAIN_LikedScreen,
-  MAIN_DownloadedScreen
+  MAIN_DownloadedScreen,
+  MAIN_ComicHotScreen
 };
