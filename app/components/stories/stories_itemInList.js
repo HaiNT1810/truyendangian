@@ -12,10 +12,9 @@ const Stories_itemInList = (props) => {
         const { x, y, height, width } = event.nativeEvent.layout;
         setImgHeight(width * (1 / Images.size.storiesItem));
     }
-
     return (
         <View style={styles.container} onLayout={onLayout}>
-            <TouchableOpacity onPress={() => { console.log("natigate item " + item.ID) }}>
+            <TouchableOpacity onPress={() => { navigation.navigate("Story_detailScreen", { id: item.ID }) }}>
                 <ImageBackground source={item.Image} style={[styles.image, { height: imgHeight }]} >
                     <View style={{ position: 'absolute', top: 10, left: 10 }}>
                         <Text style={styles.score}>{item.Score.toFixed(1)}</Text>
