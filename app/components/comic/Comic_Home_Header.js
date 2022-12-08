@@ -35,7 +35,7 @@ const Comic_Home_Header = (props) => {
     data && <Fragment>
       <StatusBar translucent backgroundColor={'transparent'} />
       <View style={styles.headerContainer}>
-        <Image style={styles.headerImage} source={data.Image}></Image>
+        <Image style={styles.headerImage} source={data.Image ?? Images.noimage}></Image>
         <View style={styles.searchBar}>
           <Image style={styles.iconVector} source={Images.logo}></Image>
           <View style={styles.searchBell} >

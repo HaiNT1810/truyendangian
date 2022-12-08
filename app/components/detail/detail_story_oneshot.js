@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Colors, Images } from '@app/themes';
 import Detail_Header from './detail_Header';
 import { useDispatch } from 'react-redux';
+import { Comment_StartView } from '../interactive';
 
 const Detail_story_oneshot = (props) => {
     const { item } = props;
@@ -16,6 +17,7 @@ const Detail_story_oneshot = (props) => {
                 description={item.Description} score={item.Score}
                 types={["4+", "1 tập", "Truyện cười", "Truyện dân gian"]}
                 showContent={true} content={"Nội dung truyện để đọc"}></Detail_Header>
+            <Comment_StartView type="business" dataId={1}></Comment_StartView>
         </View>
     );
 };

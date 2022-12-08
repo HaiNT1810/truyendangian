@@ -7,6 +7,7 @@ import TDTextInputAccount from './TDTextInputAccount';
 import TDMenuItem from './TDMenuItem';
 import TDDivider from './TDDivider';
 import Header from './Header';
+import TDCommentInput from './TDCommentInput';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   TDTextInputAccount,
   TDMenuItem,
   TDDivider,
+  TDCommentInput
 };

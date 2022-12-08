@@ -4,7 +4,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 import { useNavigation } from '@react-navigation/native';
 import { Colors, Fonts, Images } from '@app/themes';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@app/utils';
-import TDButtonPrimary from '../TDButtonPrimary';
 
 const Detail_Header = (props) => {
     const { image, title, description, showDesc, score, types, showContent, content } = props;
@@ -12,19 +11,34 @@ const Detail_Header = (props) => {
     return (
         <ScrollView style={{ flex: 1 }} showsHorizontalScrollIndicator={true}>
             <StatusBar translucent backgroundColor={'transparent'} />
-            <View style={styles.headerContainer}>
-                <Image style={styles.headerImage} source={image}></Image>
-                <View style={styles.topBtn}>
-                    <View style={styles.topBtn_left}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <FontAwesome name="arrow-left" size={24} color={Colors.white} underlayColor="#00000000" />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.topBtn_right}>
+            {image ?
+                <View style={styles.headerContainer}>
+                    <Image style={styles.headerImage} source={image}></Image>
+                    <View style={styles.topBtn}>
+                        <View style={styles.topBtn_left}>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <FontAwesome name="arrow-left" size={24} color={Colors.white} underlayColor="#00000000" />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.topBtn_right}>
 
+                        </View>
                     </View>
                 </View>
-            </View>
+                :
+                <View style={styles.headerContainerNoImage}>
+                    <View style={styles.topBtn}>
+                        <View style={styles.topBtn_left}>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <FontAwesome name="arrow-left" size={24} color={Colors.white} underlayColor="#00000000" />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.topBtn_right}>
+
+                        </View>
+                    </View>
+                </View>
+            }
             <View style={{ paddingHorizontal: 20 }}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText} numberOfLines={1} ellipsizeMode='tail'>{title}</Text>
@@ -42,7 +56,6 @@ const Detail_Header = (props) => {
                 </View>
                 {showDesc && <Text style={styles.content}>{description}</Text>}
                 {showContent && <Text style={styles.content}>{content}</Text>}
-
             </View>
         </ScrollView>
     );
@@ -51,7 +64,8 @@ const Detail_Header = (props) => {
 export default Detail_Header;
 
 const styles = StyleSheet.create({
-    headerContainer: { width: WINDOW_WIDTH, height: 250, position: 'relative' },
+    headerContainer: { height: 250, position: 'relative' },
+    headerContainerNoImage: { height: 80, position: 'relative' },
     headerImage: { width: '100%', height: '100%', resizeMode: 'cover' },
     topBtn: {
         position: 'absolute', top: 50, flexDirection: 'row',

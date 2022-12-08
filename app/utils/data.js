@@ -82,7 +82,7 @@ export const demoTruyens = [
         Title: "Tấm cám",
         Description: "Truyện kể về Tấm, và Cám",
         Author: "Sưu tầm",
-        Image: require("@app/assets/images/comics/comic_1.png"),
+        Image: null,
         Score: 9.8
     },
     {
