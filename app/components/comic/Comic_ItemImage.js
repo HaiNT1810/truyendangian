@@ -8,13 +8,16 @@ import {
 } from "react-native";
 import { WINDOW_WIDTH } from "@app/utils";
 import { Colors } from "@app/themes";
+import { useNavigation } from "@react-navigation/native";
 
 const Comic_ItemImage = (props) => {
+  const navigation = useNavigation();
   const { data, index } = props
   return <View style={styles.newsItem}>
-    <TouchableOpacity onPress={() => { navigation.navigate('//path to navigate', { id: data.ID }); }}>
+    <TouchableOpacity onPress={() => {}}>
+      {/* navigation.navigate('//path to navigate', { id: data.ID }); } */}
       <Image style={styles.newsImage} source={data.Image}></Image>
-      <Text style={styles.score}>{data.Score}</Text>
+      <Text style={styles.score}>{data.Score.toFixed(1)}</Text>
       <Text style={styles.newsTitle}>{index + 1}</Text>
     </TouchableOpacity>
   </View>
@@ -44,14 +47,12 @@ const styles = StyleSheet.create({
   },
   newsTitle: {
     width: '100%',
-    paddingLeft: 10,
     paddingRight: 10,
     position: 'absolute',
-    bottom: 10, left: 5,
+    bottom: 12, left: 6,
     color: Colors.white,
-    backgroundColor: "#28282873",
-    fontSize: 18,
-    textAlign: 'center',
+    fontSize: 35,
+    textAlign: 'left',
     fontWeight: 'bold',
   },
   newsParams: {

@@ -22,9 +22,9 @@ const MAIN_ComicScreen = () => {
       />
       <Comic_List_Horizontal
         type='tophit'
-        headerText="Có chắc HOT là đây"
+        headerText="Truyện HOT"
         showSeeMore={true}
-        onPressSeeMore={() => navigation.navigate('MAIN_ComicHotScreen')}
+        onPressSeeMore={() => navigation.navigate('Comic_ListDetailScreen')}
       />
     </View>
   );
